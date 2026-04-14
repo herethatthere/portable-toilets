@@ -117,12 +117,12 @@
     </div>
     <div class="card ref">
       <p class="ct">Sanitary fluid (biocide)</p>
-      <p class="cv">75 l</p>
+      <p class="cv">15 l</p>
     </div>
     <div class="card ref">
       <p class="ct">Usable volume (net)</p>
-      <p class="cv" id="dixi-nutz">175 l</p>
-      <p class="cu">250 − 75 l</p>
+      <p class="cv" id="dixi-nutz">235 l</p>
+      <p class="cu">250 − 15 l</p>
     </div>
   </div>
 
@@ -228,7 +228,7 @@ function calc() {
   document.getElementById('dry-puf-out').textContent   = Math.round(dryPuf * 100) + ' %';
 
   const totalDixi = 250;
-  const blueDixi  = 75;
+  const blueDixi  = 15;
   const nutzDixi  = totalDixi - blueDixi;
   const pufDixi   = Math.round(nutzDixi * dixiPuf);
   const effDixi   = nutzDixi - pufDixi;
