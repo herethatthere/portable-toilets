@@ -1,281 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dry Toilet vs Chemical Toilet — Volume Comparison</title>
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dry Toilet vs Chemical Toilet — Volume Comparison</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --color-background-primary: #ffffff;
-    --color-background-secondary: #f4f3ef;
-    --color-text-primary: #1a1a18;
-    --color-text-secondary: #73726c;
-    --color-border-tertiary: rgba(0,0,0,0.12);
-    --color-border-secondary: rgba(0,0,0,0.22);
-    --border-radius-md: 8px;
-    --border-radius-lg: 12px;
-    --font-sans: system-ui, -apple-system, sans-serif;
-  }
-
-  @media (prefers-color-scheme: dark) {
     :root {
-      --color-background-primary: #1e1e1c;
-      --color-background-secondary: #2a2a27;
-      --color-text-primary: #e8e6de;
-      --color-text-secondary: #9c9a92;
-      --color-border-tertiary: rgba(255,255,255,0.1);
-      --color-border-secondary: rgba(255,255,255,0.2);
+      --color-background-primary: #ffffff;
+      --color-background-secondary: #f5f4f0;
+      --color-text-primary: #1a1a18;
+      --color-text-secondary: #73726c;
+      --color-border-tertiary: rgba(0,0,0,0.12);
+      --color-border-secondary: rgba(0,0,0,0.22);
+      --border-radius-md: 8px;
+      --border-radius-lg: 12px;
+      --font-sans: system-ui, -apple-system, sans-serif;
     }
-  }
 
-  body {
-    font-family: var(--font-sans);
-    background: var(--color-background-secondary);
-    color: var(--color-text-primary);
-    min-height: 100vh;
-    padding: 2rem 1rem;
-  }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-background-primary: #1e1e1c;
+        --color-background-secondary: #2a2a28;
+        --color-text-primary: #e8e6de;
+        --color-text-secondary: #9c9a92;
+        --color-border-tertiary: rgba(255,255,255,0.12);
+        --color-border-secondary: rgba(255,255,255,0.22);
+      }
+    }
 
-  .container {
-    max-width: 760px;
-    margin: 0 auto;
-    background: var(--color-background-primary);
-    border-radius: var(--border-radius-lg);
-    border: 0.5px solid var(--color-border-tertiary);
-    padding: 2rem;
-  }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-background-secondary);
+      color: var(--color-text-primary);
+      padding: 2rem 1rem;
+      min-height: 100vh;
+    }
 
-  h1 {
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--color-text-primary);
-    margin-bottom: 4px;
-  }
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      background: var(--color-background-secondary);
+    }
 
-  .subtitle {
-    font-size: 13px;
-    color: var(--color-text-secondary);
-    margin-bottom: 2rem;
-  }
+    h1 {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      margin-bottom: 0.25rem;
+    }
 
-  .sl { font-size: 11px; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 0.75rem; font-weight: 500; }
-  .slider-row { display: flex; align-items: center; gap: 12px; margin-bottom: 11px; }
-  .slider-row label { font-size: 13px; color: var(--color-text-secondary); min-width: 200px; }
-  .slider-row input { flex: 1; }
-  .slider-row .val { font-size: 13px; font-weight: 500; color: var(--color-text-primary); min-width: 55px; text-align: right; }
-  .cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 1.25rem 0; }
-  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 0.9rem 1rem; }
-  .card.ref { background: var(--color-background-secondary); }
-  .ct { font-size: 11px; color: var(--color-text-secondary); margin: 0 0 5px; }
-  .cv { font-size: 24px; font-weight: 500; color: var(--color-text-primary); line-height: 1.1; }
-  .cu { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
-  .bar-row { margin-bottom: 12px; }
-  .bar-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--color-text-secondary); margin-bottom: 3px; }
-  .bar-label span:last-child { font-weight: 500; color: var(--color-text-primary); min-width: 40px; text-align: right; }
-  .bar-track { height: 20px; background: var(--color-background-secondary); border-radius: 4px; overflow: hidden; }
-  .bar-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; display: flex; align-items: center; padding-left: 8px; font-size: 11px; color: rgba(255,255,255,0.9); white-space: nowrap; overflow: hidden; }
-  .divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 1.5rem 0; }
-  .note { font-size: 12px; color: var(--color-text-secondary); border-left: 2px solid var(--color-border-secondary); padding-left: 10px; margin: 0.4rem 0 1rem; line-height: 1.6; }
-  .params-box { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
-  .footer-note { font-size: 11px; color: var(--color-text-secondary); margin-top: 1rem; }
+    .subtitle {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      margin-bottom: 2rem;
+    }
 
-  input[type=range] {
-    -webkit-appearance: none;
-    height: 4px;
-    background: var(--color-border-secondary);
-    border-radius: 2px;
-    outline: none;
-  }
-  input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: var(--color-text-primary);
-    cursor: pointer;
-  }
-
-  @media (max-width: 560px) {
-    .cards { grid-template-columns: 1fr 1fr; }
-    .slider-row label { min-width: 140px; font-size: 12px; }
-    .container { padding: 1.25rem; }
-  }
-</style>
+    .wrap { padding: 0; font-size: 14px; }
+    .sl { font-size: 11px; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 0.75rem; font-weight: 500; }
+    .slider-row { display: flex; align-items: center; gap: 12px; margin-bottom: 11px; }
+    .slider-row label { font-size: 13px; color: var(--color-text-secondary); min-width: 200px; }
+    .slider-row input[type=range] { flex: 1; accent-color: #4E7FB5; }
+    .slider-row .val { font-size: 13px; font-weight: 500; color: var(--color-text-primary); min-width: 55px; text-align: right; }
+    .cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 1.25rem 0; }
+    @media (max-width: 560px) { .cards { grid-template-columns: 1fr 1fr; } }
+    .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 0.9rem 1rem; }
+    .card.ref { background: var(--color-background-secondary); border: 0.5px solid var(--color-border-secondary); }
+    .ct { font-size: 11px; color: var(--color-text-secondary); margin: 0 0 5px; }
+    .cv { font-size: 24px; font-weight: 500; color: var(--color-text-primary); line-height: 1.1; }
+    .cu { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+    .bar-row { margin-bottom: 12px; }
+    .bar-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--color-text-secondary); margin-bottom: 3px; }
+    .bar-label span:last-child { font-weight: 500; color: var(--color-text-primary); min-width: 40px; text-align: right; }
+    .bar-track { height: 20px; background: var(--color-background-secondary); border-radius: 4px; overflow: hidden; border: 0.5px solid var(--color-border-tertiary); }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; display: flex; align-items: center; padding-left: 8px; font-size: 11px; color: rgba(255,255,255,0.9); white-space: nowrap; overflow: hidden; }
+    .divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 1.5rem 0; }
+    .note { font-size: 12px; color: var(--color-text-secondary); border-left: 2px solid var(--color-border-secondary); padding-left: 10px; margin: 0.4rem 0 1rem; line-height: 1.6; }
+    .params-box { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
+    .section { margin-bottom: 2rem; }
+  </style>
 </head>
 <body>
-<div class="container">
-  <h1>Dry Toilet vs Chemical Toilet</h1>
-  <p class="subtitle">Container volume comparison — calibrated to equivalent faecal load</p>
+  <div class="container">
+    <h1>Dry toilet vs. chemical toilet — volume comparison</h1>
+    <p class="subtitle">Container sizing for a urine-diverting dry toilet (UDDT) equivalent to a standard 250 l chemical portable toilet</p>
 
-  <p class="sl">Fixed values (chemical toilet reference)</p>
-  <div class="cards" style="margin-bottom:1.5rem">
-    <div class="card ref">
-      <p class="ct">Chemical toilet total tank</p>
-      <p class="cv">250 l</p>
-    </div>
-    <div class="card ref">
-      <p class="ct">Sanitary fluid (biocide)</p>
-      <p class="cv">15 l</p>
-    </div>
-    <div class="card ref">
-      <p class="ct">Usable volume (net)</p>
-      <p class="cv" id="dixi-nutz">235 l</p>
-      <p class="cu">250 − 15 l</p>
+    <div class="wrap">
+
+      <div class="section">
+        <p class="sl">Fixed values (chemical toilet reference)</p>
+        <div class="cards">
+          <div class="card ref">
+            <p class="ct">Chemical toilet total tank</p>
+            <p class="cv">250 l</p>
+          </div>
+          <div class="card ref">
+            <p class="ct">Sanitary fluid (biocide)</p>
+            <p class="cv">15 l</p>
+          </div>
+          <div class="card ref">
+            <p class="ct">Usable volume (net)</p>
+            <p class="cv">235 l</p>
+            <p class="cu">250 − 15 l</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <p class="sl">Adjustable parameters</p>
+        <div class="params-box">
+          <div class="slider-row">
+            <label>Chemical toilet buffer (%)</label>
+            <input type="range" id="dixi-puf" min="5" max="25" value="15" step="5" oninput="calc()">
+            <span class="val" id="dixi-puf-out">15 %</span>
+          </div>
+          <div class="slider-row">
+            <label>Urine share of faecal volume</label>
+            <input type="range" id="urinpct" min="65" max="85" value="75" step="5" oninput="calc()">
+            <span class="val" id="urinpct-out">75 %</span>
+          </div>
+          <div class="slider-row">
+            <label>Cover material ratio (vol. cover : faeces)</label>
+            <input type="range" id="litter" min="0.5" max="3" value="1" step="0.5" oninput="calc()">
+            <span class="val" id="litter-out">1 : 1</span>
+          </div>
+          <div class="slider-row">
+            <label>Dry toilet buffer (%)</label>
+            <input type="range" id="dry-puf" min="5" max="25" value="15" step="5" oninput="calc()">
+            <span class="val" id="dry-puf-out">15 %</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <p class="sl">Dry toilet — container sizes</p>
+        <div class="cards">
+          <div class="card">
+            <p class="ct">Urine content (net)</p>
+            <p class="cv" id="r-urin-net">—</p>
+            <p class="cu">litres</p>
+          </div>
+          <div class="card">
+            <p class="ct">Faeces (net)</p>
+            <p class="cv" id="r-faeces-net">—</p>
+            <p class="cu">litres, excl. cover material</p>
+          </div>
+          <div class="card">
+            <p class="ct">Faeces + cover material (net)</p>
+            <p class="cv" id="r-faeces-litter-net">—</p>
+            <p class="cu">litres incl. cover material</p>
+          </div>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <p class="ct">Urine container (recommended)</p>
+            <p class="cv" id="r-urin-puf">—</p>
+            <p class="cu">litres incl. buffer</p>
+          </div>
+          <div class="card">
+            <p class="ct">Faeces container (recommended)</p>
+            <p class="cv" id="r-faeces-puf">—</p>
+            <p class="cu">litres incl. buffer + cover material</p>
+          </div>
+          <div class="card ref">
+            <p class="ct">Total recommended</p>
+            <p class="cv" id="r-total-puf">—</p>
+            <p class="cu">litres (both containers)</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section">
+        <p class="sl">Visual comparison</p>
+        <div class="bar-row">
+          <div class="bar-label"><span>Chemical toilet — sanitary fluid (biocide)</span><span>15 l</span></div>
+          <div class="bar-track"><div class="bar-fill" style="background:#8EA8CC;width:5%">15 l</div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>Chemical toilet — effective faecal content (net)</span><span id="bl-dixi-eff">—</span></div>
+          <div class="bar-track"><div class="bar-fill" id="bf-dixi-eff" style="background:#4E7FB5"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>Chemical toilet — buffer</span><span id="bl-dixi-puf">—</span></div>
+          <div class="bar-track"><div class="bar-fill" id="bf-dixi-puf" style="background:#A0B8D0"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>Dry toilet — urine container (recommended)</span><span id="bl-urin">—</span></div>
+          <div class="bar-track"><div class="bar-fill" id="bf-urin" style="background:#4E8A6A"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>Dry toilet — faeces container (recommended)</span><span id="bl-faeces">—</span></div>
+          <div class="bar-track"><div class="bar-fill" id="bf-faeces" style="background:#B5835A"></div></div>
+        </div>
+
+        <p class="note" id="note-text"></p>
+
+        <p style="font-size:11px;color:var(--color-text-secondary);margin-top:1rem">Base: 235 l usable volume (250 l tank − 15 l sanitary fluid), split by urine share slider. Cover material increases solid fraction volume only. Buffer accounts for usage peaks, spillage, and misuse.</p>
+      </div>
+
     </div>
   </div>
 
-  <p class="sl">Adjustable parameters</p>
-  <div class="params-box">
-    <div class="slider-row">
-      <label>Chemical toilet buffer (%)</label>
-      <input type="range" id="dixi-puf" min="5" max="25" value="15" step="1" oninput="calc()">
-      <span class="val" id="dixi-puf-out">15 %</span>
-    </div>
-    <div class="slider-row">
-      <label>Urine share of faecal volume</label>
-      <input type="range" id="urinpct" min="65" max="85" value="75" step="1" oninput="calc()">
-      <span class="val" id="urinpct-out">75 %</span>
-    </div>
-    <div class="slider-row">
-      <label>Cover material ratio (vol. cover : faeces)</label>
-      <input type="range" id="litter" min="0.5" max="3" value="1" step="0.5" oninput="calc()">
-      <span class="val" id="litter-out">1 : 1</span>
-    </div>
-    <div class="slider-row">
-      <label>Dry toilet buffer (%)</label>
-      <input type="range" id="dry-puf" min="5" max="25" value="15" step="5" oninput="calc()">
-      <span class="val" id="dry-puf-out">15 %</span>
-    </div>
-  </div>
+  <script>
+    function calc() {
+      const dixiPuf = parseInt(document.getElementById('dixi-puf').value) / 100;
+      const urinpct = parseInt(document.getElementById('urinpct').value) / 100;
+      const litter  = parseFloat(document.getElementById('litter').value);
+      const dryPuf  = parseInt(document.getElementById('dry-puf').value) / 100;
 
-  <p class="sl">Dry toilet — container sizes</p>
-  <div class="cards">
-    <div class="card">
-      <p class="ct">Urine content (net)</p>
-      <p class="cv" id="r-urin-net">—</p>
-      <p class="cu">litres of faecal volume</p>
-    </div>
-    <div class="card">
-      <p class="ct">Faeces + cover material (net)</p>
-      <p class="cv" id="r-faeces-net">—</p>
-      <p class="cu">litres incl. cover material</p>
-    </div>
-    <div class="card">
-      <p class="ct">Total volume (net)</p>
-      <p class="cv" id="r-total-net">—</p>
-      <p class="cu">litres</p>
-    </div>
-  </div>
-  <div class="cards">
-    <div class="card">
-      <p class="ct">Urine container (recommended)</p>
-      <p class="cv" id="r-urin-puf">—</p>
-      <p class="cu">litres incl. buffer</p>
-    </div>
-    <div class="card">
-      <p class="ct">Faeces container (recommended)</p>
-      <p class="cv" id="r-faeces-puf">—</p>
-      <p class="cu">litres incl. buffer</p>
-    </div>
-    <div class="card">
-      <p class="ct">Total recommended</p>
-      <p class="cv" id="r-total-puf">—</p>
-      <p class="cu">litres (both containers)</p>
-    </div>
-  </div>
+      document.getElementById('dixi-puf-out').textContent = Math.round(dixiPuf * 100) + ' %';
+      document.getElementById('urinpct-out').textContent  = Math.round(urinpct * 100) + ' %';
+      document.getElementById('litter-out').textContent   = litter.toFixed(1) + ' : 1';
+      document.getElementById('dry-puf-out').textContent  = Math.round(dryPuf * 100) + ' %';
 
-  <hr class="divider">
-  <p class="sl">Visual comparison</p>
+      const usable  = 235;
+      const pufDixi = Math.round(usable * dixiPuf);
+      const effDixi = usable - pufDixi;
 
-  <div class="bar-row">
-    <div class="bar-label"><span>Chemical toilet — sanitary fluid (biocide)</span><span>15 l</span></div>
-    <div class="bar-track"><div class="bar-fill" style="background:#8EA8CC;width:30%">15 l biocide</div></div>
-  </div>
-  <div class="bar-row">
-    <div class="bar-label"><span>Chemical toilet — effective faecal content (net)</span><span id="bl-dixi-eff">—</span></div>
-    <div class="bar-track"><div class="bar-fill" id="bf-dixi-eff" style="background:#4E7FB5"></div></div>
-  </div>
-  <div class="bar-row">
-    <div class="bar-label"><span>Chemical toilet — buffer</span><span id="bl-dixi-puf">—</span></div>
-    <div class="bar-track"><div class="bar-fill" id="bf-dixi-puf" style="background:#A0B8D0"></div></div>
-  </div>
-  <div class="bar-row">
-    <div class="bar-label"><span>Dry toilet — urine container (recommended)</span><span id="bl-urin">—</span></div>
-    <div class="bar-track"><div class="bar-fill" id="bf-urin" style="background:#4E8A6A"></div></div>
-  </div>
-  <div class="bar-row">
-    <div class="bar-label"><span>Dry toilet — faeces container (recommended)</span><span id="bl-faeces">—</span></div>
-    <div class="bar-track"><div class="bar-fill" id="bf-faeces" style="background:#B5835A"></div></div>
-  </div>
+      const urinNet   = Math.round(effDixi * urinpct);
+      const faecesNet = effDixi - urinNet;
+      const faecesLit = Math.round(faecesNet * (1 + litter));
 
-  <p class="note" id="note-text"></p>
+      const urinPuf   = Math.round(urinNet   * (1 + dryPuf));
+      const faecesPuf = Math.round(faecesLit * (1 + dryPuf));
+      const totalPuf  = urinPuf + faecesPuf;
 
-  <p class="footer-note">Urine 75% / faeces 25% by volume (WHO reference values). Cover material increases solid fraction volume only. Buffer accounts for usage peaks, spillage, and misuse.</p>
-</div>
+      document.getElementById('r-urin-net').textContent          = urinNet + ' l';
+      document.getElementById('r-faeces-net').textContent        = faecesNet + ' l';
+      document.getElementById('r-faeces-litter-net').textContent = faecesLit + ' l';
+      document.getElementById('r-urin-puf').textContent          = urinPuf + ' l';
+      document.getElementById('r-faeces-puf').textContent        = faecesPuf + ' l';
+      document.getElementById('r-total-puf').textContent         = totalPuf + ' l';
 
-<script>
-function calc() {
-  const dixiPuf = parseInt(document.getElementById('dixi-puf').value) / 100;
-  const urinpct = parseInt(document.getElementById('urinpct').value) / 100;
-  const litter  = parseFloat(document.getElementById('litter').value);
-  const dryPuf  = parseInt(document.getElementById('dry-puf').value) / 100;
+      const maxB = 300;
+      const pct = v => Math.min(98, Math.round((v / maxB) * 95));
 
-  document.getElementById('dixi-puf-out').textContent  = Math.round(dixiPuf * 100) + ' %';
-  document.getElementById('urinpct-out').textContent   = Math.round(urinpct * 100) + ' %';
-  document.getElementById('litter-out').textContent    = litter.toFixed(1) + ' : 1';
-  document.getElementById('dry-puf-out').textContent   = Math.round(dryPuf * 100) + ' %';
+      document.getElementById('bl-dixi-eff').textContent = effDixi + ' l';
+      document.getElementById('bf-dixi-eff').style.width = pct(effDixi) + '%';
+      document.getElementById('bf-dixi-eff').textContent = effDixi + ' l';
 
-  const totalDixi = 250;
-  const blueDixi  = 15;
-  const nutzDixi  = totalDixi - blueDixi;
-  const pufDixi   = Math.round(nutzDixi * dixiPuf);
-  const effDixi   = nutzDixi - pufDixi;
+      document.getElementById('bl-dixi-puf').textContent = pufDixi + ' l';
+      document.getElementById('bf-dixi-puf').style.width = pct(pufDixi) + '%';
+      document.getElementById('bf-dixi-puf').textContent = pufDixi + ' l';
 
-  document.getElementById('dixi-nutz').textContent = nutzDixi + ' l';
+      document.getElementById('bl-urin').textContent     = urinPuf + ' l';
+      document.getElementById('bf-urin').style.width     = pct(urinPuf) + '%';
+      document.getElementById('bf-urin').textContent     = urinPuf + ' l';
 
-  const urinNet   = Math.round(effDixi * urinpct);
-  const faecesRaw = effDixi - urinNet;
-  const faecesLit = Math.round(faecesRaw * (1 + litter));
-  const totalNet  = urinNet + faecesLit;
+      document.getElementById('bl-faeces').textContent   = faecesPuf + ' l';
+      document.getElementById('bf-faeces').style.width   = pct(faecesPuf) + '%';
+      document.getElementById('bf-faeces').textContent   = faecesPuf + ' l';
 
-  const urinPuf   = Math.round(urinNet   * (1 + dryPuf));
-  const faecesPuf = Math.round(faecesLit * (1 + dryPuf));
-  const totalPuf  = urinPuf + faecesPuf;
-
-  document.getElementById('r-urin-net').textContent   = urinNet + ' l';
-  document.getElementById('r-faeces-net').textContent = faecesLit + ' l';
-  document.getElementById('r-total-net').textContent  = totalNet + ' l';
-  document.getElementById('r-urin-puf').textContent   = urinPuf + ' l';
-  document.getElementById('r-faeces-puf').textContent = faecesPuf + ' l';
-  document.getElementById('r-total-puf').textContent  = totalPuf + ' l';
-
-  const maxB = 250;
-  const pct = v => Math.min(98, Math.round((v / maxB) * 95));
-
-  document.getElementById('bl-dixi-eff').textContent  = effDixi + ' l';
-  document.getElementById('bf-dixi-eff').style.width  = pct(effDixi) + '%';
-  document.getElementById('bf-dixi-eff').textContent  = effDixi + ' l faecal content';
-
-  document.getElementById('bl-dixi-puf').textContent  = pufDixi + ' l';
-  document.getElementById('bf-dixi-puf').style.width  = pct(pufDixi) + '%';
-  document.getElementById('bf-dixi-puf').textContent  = pufDixi + ' l';
-
-  document.getElementById('bl-urin').textContent      = urinPuf + ' l';
-  document.getElementById('bf-urin').style.width      = pct(urinPuf) + '%';
-  document.getElementById('bf-urin').textContent      = urinPuf + ' l';
-
-  document.getElementById('bl-faeces').textContent    = faecesPuf + ' l';
-  document.getElementById('bf-faeces').style.width    = pct(faecesPuf) + '%';
-  document.getElementById('bf-faeces').textContent    = faecesPuf + ' l';
-
-  document.getElementById('note-text').textContent =
-    'Chemical toilet usable volume: ' + nutzDixi + ' l, of which ' + pufDixi + ' l buffer → ' + effDixi + ' l effective faecal content. ' +
-    'Dry toilet: urine container ' + urinPuf + ' l + faeces container ' + faecesPuf + ' l = ' + totalPuf + ' l total. ' +
-    'Additional volume vs. chemical toilet usable volume (' + nutzDixi + ' l): +' + (totalPuf - nutzDixi) + ' l, entirely due to cover material.';
-}
-calc();
-</script>
+      document.getElementById('note-text').textContent =
+        `235 l usable volume → ${pufDixi} l buffer → ${effDixi} l effective content: ` +
+        `${urinNet} l urine + ${faecesNet} l faeces. ` +
+        `With cover material (${litter.toFixed(1)}:1): faeces container ${faecesLit} l net, ${faecesPuf} l recommended. ` +
+        `Urine container ${urinPuf} l recommended. Total: ${totalPuf} l.`;
+    }
+    calc();
+  </script>
 </body>
 </html>
